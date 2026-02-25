@@ -29,7 +29,7 @@ class CamaraDron:
         cv2.destroyAllWindows()
         print("[VISIÓN] Cámara apagada.")
 
-#'''
+'''
 if __name__ == "__main__":
     from filtros_hsv import detectar_rojo
     
@@ -54,31 +54,27 @@ if __name__ == "__main__":
         print("\nPrueba interrumpida por el usuario.")
     finally:
         camara.apagar()
-#'''
-        
 '''
+        
+#'''
 if __name__ == "__main__":
 
     from detector_qr import decodificar_qr
     
-    camara1 = CamaraDron(indice_camara=0)
-    camara2 = CamaraDron(indice_camara=2)
+    camara1 = CamaraDron(indice_camara=2)
     
     try:
         while True:
             exito, frame_color, frame_gris = camara1.leer_frame()
-            exito2, frame_color2, frame_gris2 = camara2.leer_frame()
-            
-            if exito and exito2:
-                texto_encontrado, frame_con_dibujo = decodificar_qr(frame_gris, frame_color)
-                texto_encontrado2, frame_con_dibujo2 = decodificar_qr(frame_gris2, frame_color2)
 
-                if texto_encontrado and texto_encontrado2:
+            
+            if exito:
+                texto_encontrado, frame_con_dibujo = decodificar_qr(frame_gris, frame_color)
+
+                if texto_encontrado:
                     print(f"[ALERTA] QR Detectado: {texto_encontrado}")
-                    print(f"[ALERTA2] QR Detectado: {texto_encontrado2}")
                 
                 cv2.imshow("Vista Dron CJ7 (Lector QR)", frame_con_dibujo)
-                cv2.imshow("Vista Dron2 CJ7 (Lector QR)", frame_con_dibujo2)
             
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
@@ -87,5 +83,4 @@ if __name__ == "__main__":
         print("\nPrueba interrumpida por el usuario.")
     finally:
         camara1.apagar()
-        camara2.apagar()
-'''
+#'''

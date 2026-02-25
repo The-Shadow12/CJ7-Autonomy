@@ -2,8 +2,9 @@ import cv2
 from pyzbar.pyzbar import decode
 
 def decodificar_qr(frame_gris, frame_color):
+    _, frame_blanco_negro = cv2.threshold(frame_gris, 100, 255, cv2.THRESH_BINARY)
 
-    codigos_detectados = decode(frame_gris)
+    codigos_detectados = decode(frame_blanco_negro)
     texto_qr = None
     
     frame_debug = frame_color.copy()
